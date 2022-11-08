@@ -23,6 +23,11 @@ class ListFragment : Fragment() {
         private const val STATE_LIST = "state_list"
         private const val TITLE = "List"
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        list.addAll(getListHeroes())
+    }
     override fun onResume() {
         super.onResume()
         activity?.title = TITLE
@@ -32,19 +37,7 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentListBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-        binding.rvHeroes.setHasFixedSize(true)
-// untuk ganti orientation
         if (savedInstanceState == null) {
-            list.addAll(getListHeroes())
-            showRecyclerList()
         } else {
             val stateList = savedInstanceState.getParcelableArrayList<Hero>(STATE_LIST)
 
@@ -52,6 +45,16 @@ class ListFragment : Fragment() {
                 list.addAll(stateList)
             }
         }
+        binding = FragmentListBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.rvHeroes.setHasFixedSize(true)
+// untuk ganti orientation
+
+            showRecyclerList()
     }
 
 

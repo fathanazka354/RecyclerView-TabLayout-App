@@ -45,7 +45,6 @@ class CardFragment : Fragment() {
 // untuk ganti orientation
         if (savedInstanceState == null) {
             list.addAll(getListHeroes())
-            mode = R.id.action_list
         } else {
             val stateList = savedInstanceState.getParcelableArrayList<Hero>(STATE_LIST)
 
